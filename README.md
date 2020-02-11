@@ -11,7 +11,8 @@ Live Githack Link: https://raw.githack.com/Aaron-RN/JS-BattleShips/development/d
 - HTML, CSS
 - JavaScript
 - NPM
-- Jest
+- [Jest](https://github.com/facebook/jest)
+
 
 ## Authors
 
