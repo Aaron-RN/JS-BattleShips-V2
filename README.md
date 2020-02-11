@@ -9,8 +9,8 @@ Live Githack Link: https://raw.githack.com/Aaron-RN/JS-BattleShips/development/d
 ## Built With
 
 - HTML, CSS
-- JavaScript
-- NPM
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [NPM](https://www.npmjs.com/)
 - [Jest](https://github.com/facebook/jest)
 
 
