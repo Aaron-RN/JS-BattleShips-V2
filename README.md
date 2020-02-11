@@ -10,7 +10,7 @@ Live Githack Link: https://raw.githack.com/Aaron-RN/JS-BattleShips/development/d
 
 - HTML, CSS
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [NPM(Node Package Manager)](https://www.npmjs.com/)
+- [Node Package Manager(NPM)](https://www.npmjs.com/)
 - [Jest](https://github.com/facebook/jest)
 
 
