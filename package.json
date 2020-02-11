@@ -9,6 +9,11 @@
     "build": "webpack --prod",
     "watch": "webpack --watch --dev"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Aaron-RN/JS-BattleShips.git"
@@ -22,6 +27,8 @@
   "homepage": "https://github.com/Aaron-RN/JS-BattleShips#readme",
   "dependencies": {},
   "devDependencies": {
+    "@babel/preset-env": "^7.8.4",
+    "babel-jest": "^25.1.0",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
