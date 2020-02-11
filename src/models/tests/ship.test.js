@@ -1,7 +1,7 @@
 const ship = require('../ship.js');
 
 describe('#init', () => {
-  test('generates a new ship with a set length at a set position', () => {
-    expect(ship.init(1, 2)).toEqual({});
+  test('generates a ship object with built in functions', () => {
+    expect(ship(1)).toMatchObject({ hit: false, isSunk: false, maxHP: 1 });
   });
 });

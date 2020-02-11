@@ -1,0 +1,41 @@
+html { box-sizing: border-box; }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  transition-duration: 0.25s;
+}
+
+#PlayerOneBoard, #PlayerTwoBoard {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px;
+  outline: 1px solid black;
+  background-image: url(../images/AnimatedWater_mid.png);
+  background-repeat: repeat;
+  background-color:rgb(50,90,180);
+  animation: backgroundScroll 80s linear infinite;
+}
+
+.cell {
+  flex: 1 0 9.5%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid royalblue;
+  cursor: pointer;
+}
+
+.cell:hover{
+  border-style: dotted;
+  border-color: goldenrod;
+}
+
+/*Animations*/
+@keyframes backgroundScroll {
+from {background-position: 0 0;}
+to {background-position: -1000px -1000px;}
+}
