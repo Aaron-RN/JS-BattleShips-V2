@@ -1,0 +1,34 @@
+{
+  "name": "JS-BattleShips",
+  "version": "1.0.0",
+  "description": "Creating the classic game ‘Battleship’ within a Test Development Driven (TDD) environment. If you’ve never played it, or need a refresher you can read about it [here](https://en.wikipedia.org/wiki/Battleship_(game)) and you can play an online version [here](http://en.battleship-game.org/).",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "testW": "jest --watch",
+    "build": "webpack --prod",
+    "watch": "webpack --watch --dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aaron-RN/JS-BattleShips.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aaron-RN/JS-BattleShips/issues"
+  },
+  "homepage": "https://github.com/Aaron-RN/JS-BattleShips#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "jest": "^25.1.0",
+    "style-loader": "^1.1.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^4.0.0-beta.2"
+  }
+}

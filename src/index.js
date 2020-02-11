@@ -1,0 +1,1 @@
+document.querySelector('#gameboard').textContent="yup";
