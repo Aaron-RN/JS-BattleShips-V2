@@ -1,5 +1,9 @@
+import Event from './event';
+
 const GameBoard = (size) => {
+  const placeShipEvent = new Event();
   const board = Array(size).fill(Array(size).fill()).map(row => row.map(cell => { return { shipId: null, fired: false }}));
+  const ships = [];
   const getBoard = () => board;
   const placeShip = (ship, x, y, direction) => {
     if (x > size - 1) { return false; }
@@ -30,9 +34,6 @@ const GameBoard = (size) => {
     const { startX, finishX } = x < finalX ? { startX: x, finishX: finalX } : { startX: finalX, finishX: x };
     const { startY, finishY } = y < finalY ? { startY: y, finishY: finalY } : { startY: finalY, finishY: y };
 
-    console.log('Start X: ' + startX + ' Finish X: ' + finishX);
-    console.log('Start Y: ' + startY + ' Finish Y: ' + finishY);
-
     for (let i = startX; i <= finishX; i++) {
       for (let j = startY; j <= finishY; j++) {
         if (board[j][i].shipId) {
@@ -48,10 +49,15 @@ const GameBoard = (size) => {
       }
     }
 
+    placeShipEvent.notify({ startX, finishX, startY, finishY });
     return true;
   };
 
-  return { getBoard, placeShip };
+  const receiveAttack = (coords) => {
+    console.log('BOOM! at ' + coords.x + ' ' + coords.y);
+  }
+
+  return { getBoard, placeShip, placeShipEvent, receiveAttack };
 };
 
 export default GameBoard;
