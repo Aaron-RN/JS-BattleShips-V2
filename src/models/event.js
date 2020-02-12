@@ -8,7 +8,7 @@ class Event {
   }
 
   notify(args) {
-    this.listeners.forEach(listener => { listener(args) });
+    this.listeners.forEach(listener => { listener(args); });
   }
 }
 

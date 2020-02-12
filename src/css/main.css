@@ -27,6 +27,9 @@ html { box-sizing: border-box; }
   height: 50px;
   border: 1px solid royalblue;
   cursor: pointer;
+  text-align: center;
+  color: red;
+  font-weight: bold;
 }
 
 .cell:hover{

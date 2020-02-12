@@ -1,32 +1,27 @@
 import '../css/main.css';
-import Event from '../models/event';
 
 class GameBoardView {
-  constructor(selector, size) {
-    this.fireEvent = new Event();
+  constructor(model, selector) {
+    this.model = model;
     this.boardNode = document.querySelector(selector);
-    this.cells = Array(size).fill(Array(size).fill()).map((row, i) => row.map((cell, j) => {
-      cell = document.createElement('div');
-      cell.className = 'cell';
-      cell.dataset.x = i;
-      cell.dataset.y = j;
-      cell.addEventListener('click', (e) => {
-        this.fireEvent.notify({x: i, y: j});
-      });
-
-      this.boardNode.appendChild(cell);
-      return cell;
-    }));
-
-    this.placeShipListener = (coords) => {
-      const { startX, finishX, startY, finishY } = coords;
-      for (let i = startX; i <= finishX; i++) {
-        for (let j = startY; j <= finishY; j++) {
-          this.cells[j][i].innerHTML = 'X';
-        }
-      }
-    }
   }
-};
+
+  newCell(y, x) {
+    const cellNode = document.createElement('div');
+    cellNode.classList.add('cell');
+    cellNode.setAttribute('data-x', x);
+    cellNode.setAttribute('data-y', y);
+    cellNode.addEventListener('click', () => {
+      cellNode.textContent = `${y} & ${x}`;
+    });
+    this.boardNode.appendChild(cellNode);
+
+    return cellNode;
+  }
+
+  placeShip(ship) {
+    ship.node.textContent = ship.shipId;
+  }
+}
 
 export default GameBoardView;

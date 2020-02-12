@@ -1,8 +1,25 @@
-import Event from './event';
+import GameBoardView from '../views/gameboard';
 
-const GameBoard = (size) => {
-  const placeShipEvent = new Event();
-  const board = Array(size).fill(Array(size).fill()).map(row => row.map(cell => { return { shipId: null, fired: false }}));
+const GameBoard = (boardNode, size) => {
+  // the this in this view I don't think it works since this is a factory function and not a class method...
+  // so essentially I would just turn this whole thing into a class as well...
+  const view = new GameBoardView(this, boardNode);
+  //  const board = Array(size).fill(Array(size).fill())
+  //    .map(row => row.map(cell => {
+  //      return { shipId: null, fired: false }
+  //    }));
+  const board = (() => {
+    const result = [];
+    for (let y = 0; y < size; y += 1) {
+      for (let x = 0; x < size; x += 1) {
+        if (!result[y]) { result[y] = []; }
+        result[y][x] = { shipId: null, hit: false, node: view.newCell(y, x) };
+      }
+    }
+    console.log(result);
+    return result;
+  })();
+
   const ships = [];
   const getBoard = () => board;
   const placeShip = (ship, x, y, direction) => {
@@ -46,18 +63,18 @@ const GameBoard = (size) => {
     for (let i = startX; i <= finishX; i++) {
       for (let j = startY; j <= finishY; j++) {
         board[j][i].shipId = ship.id;
+        view.placeShip(board[j][i]);
       }
     }
 
-    placeShipEvent.notify({ startX, finishX, startY, finishY });
     return true;
   };
 
   const receiveAttack = (coords) => {
-    console.log('BOOM! at ' + coords.x + ' ' + coords.y);
-  }
+    console.log(`BOOM! at ${coords.x} ${coords.y}`);
+  };
 
-  return { getBoard, placeShip, placeShipEvent, receiveAttack };
+  return { getBoard, placeShip, receiveAttack };
 };
 
 export default GameBoard;
