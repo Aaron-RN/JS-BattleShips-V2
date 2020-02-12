@@ -10,11 +10,6 @@
     "watch": "webpack --watch --mode development",
     "start": "webpack-dev-server --content-base dist"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Aaron-RN/JS-BattleShips.git"
