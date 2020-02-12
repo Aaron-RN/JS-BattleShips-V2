@@ -1,7 +1,14 @@
-import ship from '../../src/models/ship';
+import Ship from '../../src/models/ship';
 
-describe('#init', () => {
-  test('generates a ship object with built in functions', () => {
-    expect(ship(1)).toMatchObject({ hit: false, isSunk: false, maxHP: 1 });
-  });
+
+test('a newly created ship is not sunk by default', () => {
+  const ship = Ship(2);
+  expect(ship.isSunk()).toBe(false);
+});
+
+test('a newly created ship is sunk after being hit enough times', () => {
+  const ship = Ship(2);
+  ship.hit();
+  ship.hit();
+  expect(ship.isSunk()).toBe(true);
 });
