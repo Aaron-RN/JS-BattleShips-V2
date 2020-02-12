@@ -12,7 +12,8 @@ class GameBoardView {
     cellNode.setAttribute('data-x', x);
     cellNode.setAttribute('data-y', y);
     cellNode.addEventListener('click', () => {
-      cellNode.textContent = `${y} & ${x}`;
+      cellNode.textContent = `${x} & ${y}`;
+      this.model.receiveAttack({x, y});
     });
     this.boardNode.appendChild(cellNode);
 

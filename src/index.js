@@ -3,7 +3,7 @@ import GameBoardView from './views/gameboard';
 
 const mainBoard = document.querySelector('#GameBoard');
 
-const boardOne = GameBoard('#PlayerOneBoard', 10);
+const boardOne = new GameBoard('#PlayerOneBoard', 10);
 
 
 boardOne.placeShip({ id: 1, length: 4 }, 0, 0, 'D');
