@@ -1,5 +1,6 @@
 import '../css/main.css';
 
+
 class GameBoardView {
   constructor(model, selector) {
     this.model = model;
@@ -12,11 +13,10 @@ class GameBoardView {
     cellNode.setAttribute('data-x', x);
     cellNode.setAttribute('data-y', y);
     cellNode.addEventListener('click', () => {
-      cellNode.textContent = `${x} & ${y}`;
-      this.model.receiveAttack({x, y});
+      const result = this.model.receiveAttack({ x, y });
+      if (result) { cellNode.classList.add(result); }
     });
     this.boardNode.appendChild(cellNode);
-
     return cellNode;
   }
 

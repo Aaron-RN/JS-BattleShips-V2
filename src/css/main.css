@@ -15,7 +15,7 @@ html { box-sizing: border-box; }
   flex-wrap: wrap;
   max-width: 500px;
   outline: 1px solid black;
-  background-image: url(../images/AnimatedWater_mid.png);
+  background-image: url(../images/water.png);
   background-repeat: repeat;
   background-color:rgb(50,90,180);
   animation: backgroundScroll 80s linear infinite;
@@ -30,11 +30,22 @@ html { box-sizing: border-box; }
   text-align: center;
   color: red;
   font-weight: bold;
+  background-size: cover;
 }
 
 .cell:hover{
   border-style: dotted;
   border-color: goldenrod;
+}
+
+.hit {
+  background-color: rgba(255, 0, 0, 0.7);
+  background-image: url(../images/hit.gif), url(../images/ship.png);
+}
+
+.missed {
+  background-color: rgba(0, 110, 255, 0.7);
+  background-image: url(../images/missed.gif);
 }
 
 /*Animations*/

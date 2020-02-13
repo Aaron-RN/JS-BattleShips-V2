@@ -1,28 +1,37 @@
+import Ship from './ship';
 import GameBoardView from '../views/gameboard';
 
 class GameBoard {
   constructor(boardNode, size) {
     this.size = size;
-    this.ships = [];
     this.view = new GameBoardView(this, boardNode);
-    //  const board = Array(size).fill(Array(size).fill())
-    //    .map(row => row.map(cell => {
-    //      return { shipId: null, fired: false }
-    //    }));
-    this.board = (() => {
-      const result = [];
-      for (let y = 0; y < size; y += 1) {
-        for (let x = 0; x < size; x += 1) {
-          if (!result[y]) { result[y] = []; }
-          result[y][x] = { shipId: null, hit: false, node: this.view.newCell(y, x) };
-        }
-      }
-      console.log(result);
-      return result;
-    })();
+    this.board = Array(size).fill(Array(size).fill())
+      .map((row, i) => row.map((cell, j) => ({
+        shipId: null,
+        hit: false,
+        node: this.view.newCell(j, i),
+      })));
+    this.ships = [5, 4, 3, 3, 2].map(i => Ship(i));
+    this.placeAllShips();
   }
 
   getBoard() { return this.board; }
+
+  getShip(shipId) {
+    return this.ships.find(ship => ship.id === shipId);
+  }
+
+  placeAllShips() {
+    this.ships.forEach(ship => {
+      let result = false;
+      do {
+        const randX = Math.floor(Math.random() * this.size);
+        const randY = Math.floor(Math.random() * this.size);
+        const randDirection = ['U', 'D', 'L', 'R'][Math.floor(Math.random() * 4)];
+        result = this.placeShip(ship, randX, randY, randDirection);
+      } while (!result);
+    });
+  }
 
   placeShip(ship, x, y, direction) {
     if (x > this.size - 1) { return false; }
@@ -50,11 +59,15 @@ class GameBoard {
     if (finalY > this.size - 1 || finalY < 0) { return false; }
 
     // Check the board for already placed ships
-    const { startX, finishX } = x < finalX ? { startX: x, finishX: finalX } : { startX: finalX, finishX: x };
-    const { startY, finishY } = y < finalY ? { startY: y, finishY: finalY } : { startY: finalY, finishY: y };
+    const { startX, finishX } = x < finalX
+      ? { startX: x, finishX: finalX }
+      : { startX: finalX, finishX: x };
+    const { startY, finishY } = y < finalY
+      ? { startY: y, finishY: finalY }
+      : { startY: finalY, finishY: y };
 
-    for (let i = startX; i <= finishX; i++) {
-      for (let j = startY; j <= finishY; j++) {
+    for (let i = startX; i <= finishX; i += 1) {
+      for (let j = startY; j <= finishY; j += 1) {
         if (this.board[j][i].shipId) {
           return false;
         }
@@ -62,10 +75,10 @@ class GameBoard {
     }
 
     // Place the ship in the board
-    for (let i = startX; i <= finishX; i++) {
-      for (let j = startY; j <= finishY; j++) {
+    for (let i = startX; i <= finishX; i += 1) {
+      for (let j = startY; j <= finishY; j += 1) {
         this.board[j][i].shipId = ship.id;
-        this.view.placeShip(this.board[j][i]);
+        // this.view.placeShip(this.board[j][i]);
       }
     }
 
@@ -73,8 +86,18 @@ class GameBoard {
   }
 
   receiveAttack(coords) {
-    return console.log(`BOOM! at ${coords.x} ${coords.y}`);
+    const cell = this.board[coords.y][coords.x];
+    if (cell.hit) { return null; }
+
+    cell.hit = true;
+    if (cell.shipId) {
+      this.getShip(cell.shipId).hit();
+      return 'hit';
+    }
+    return 'missed';
   }
+
+  allShipsSunk() { return this.ships.every(ship => ship.isSunk()); }
 }
 
 export default GameBoard;
