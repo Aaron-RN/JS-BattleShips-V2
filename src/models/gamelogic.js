@@ -9,10 +9,11 @@ class GameLogic {
     this.enemyBoard = new GameBoard(this, '#EnemyBoard', size);
     this.whosTurn = 'Player';
     this.view = new GameLogicView('#header');
+    this.enemyMoves = [...Array(size ** 2).keys()];
   }
 
   setTurn(same = false) {
-    if (!same){
+    if (!same && !this.gameOver){
       this.whosTurn = (this.whosTurn === 'Player' ? 'Enemy' : 'Player');
     }
     console.log(this.whosTurn);
@@ -22,13 +23,14 @@ class GameLogic {
   isGameOver() {
     if (this.playerBoard.allShipsSunk() || this.enemyBoard.allShipsSunk()){
       this.gameOver = true;
-      this.view.message.innerHTML = this.whosTurn + ' Won!';
+      this.view.gameOver(this.whosTurn + ' Won!');
     }
   }
 
   enemyFire() {
-    const randX = Math.floor(Math.random() * this.size);
-    const randY = Math.floor(Math.random() * this.size);
+    const move = this.enemyMoves.splice(Math.floor(Math.random() * this.enemyMoves.length), 1)[0];
+    const randX = Math.floor(move / this.size);
+    const randY = move % this.size;
     console.log(randX);
     console.log(randY);
 

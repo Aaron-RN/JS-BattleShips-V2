@@ -98,7 +98,7 @@ class GameBoard {
       this.getShip(cell.shipId).hit();
       this.gameLogic.isGameOver();
       this.view.addEffects(cell, 'hit');
-      if(!this.gameLogic.gameOver) { this.gameLogic.setTurn(true) };
+      this.gameLogic.setTurn(true);
     }
     else{
       this.gameLogic.setTurn();
