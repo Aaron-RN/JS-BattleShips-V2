@@ -14,7 +14,6 @@ class GameBoard {
         node: this.view.newCell(j, i),
       })));
     this.ships = [5, 4, 3, 3, 2].map(i => Ship(i));
-    this.placeAllShips();
   }
 
   getBoard() { return this.board; }
@@ -80,7 +79,7 @@ class GameBoard {
     for (let i = startX; i <= finishX; i += 1) {
       for (let j = startY; j <= finishY; j += 1) {
         this.board[j][i].shipId = ship.id;
-        if (this.isPlayer) {this.view.placeShip(this.board[j][i]);}
+        if (this.isPlayer) { GameBoardView.placeShip(this.board[j][i]); }
       }
     }
 
@@ -88,21 +87,19 @@ class GameBoard {
   }
 
   receiveAttack(coords) {
-    if (this.gameLogic.gameOver) {return;}
+    if (this.gameLogic.gameOver) { return; }
     const cell = this.board[coords.y][coords.x];
-    if (cell.hit) { return null; }
-
-
-    cell.hit = true;
-    if (cell.shipId) {
-      this.getShip(cell.shipId).hit();
-      this.gameLogic.isGameOver();
-      this.view.addEffects(cell, 'hit');
-      this.gameLogic.setTurn(true);
-    }
-    else{
-      this.gameLogic.setTurn();
-      this.view.addEffects(cell, 'missed');
+    if (!cell.hit) {
+      cell.hit = true;
+      if (cell.shipId) {
+        this.getShip(cell.shipId).hit();
+        this.gameLogic.isGameOver();
+        GameBoardView.addEffects(cell, 'hit');
+        this.gameLogic.setTurn(true);
+      } else {
+        this.gameLogic.setTurn();
+        GameBoardView.addEffects(cell, 'missed');
+      }
     }
   }
 
@@ -110,4 +107,3 @@ class GameBoard {
 }
 
 export default GameBoard;
-

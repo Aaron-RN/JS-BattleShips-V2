@@ -8,7 +8,7 @@ class GameLogicView {
     this.message = document.createElement('p');
     const button = document.createElement('button');
     button.innerHTML = 'Play again?';
-    button.addEventListener('click', () => { window.location.reload() });
+    button.addEventListener('click', () => { window.location.reload(); });
     this.messageContainer.appendChild(this.message);
     this.messageContainer.appendChild(button);
 

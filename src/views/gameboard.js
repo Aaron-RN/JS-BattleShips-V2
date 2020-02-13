@@ -9,7 +9,7 @@ class GameBoardView {
     cellNode.classList.add('cell');
     cellNode.setAttribute('data-x', x);
     cellNode.setAttribute('data-y', y);
-    if (!this.model.isPlayer){
+    if (!this.model.isPlayer) {
       cellNode.addEventListener('click', () => {
         this.model.receiveAttack({ x, y });
       });
@@ -18,11 +18,11 @@ class GameBoardView {
     return cellNode;
   }
 
-  addEffects(cell, effect) {
+  static addEffects(cell, effect) {
     cell.node.classList.add(effect);
   }
 
-  placeShip(ship) {
+  static placeShip(ship) {
     ship.node.classList.add('ship');
   }
 }
