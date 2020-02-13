@@ -15,23 +15,23 @@ class GameLogic {
     this.playerView = new GameBoardView(this, this.playerBoard, '#PlayerBoard');
     this.playerBoard.placeAllShips();
     this.enemyBoard = new GameBoard(this.size);
-    this.enemyView = new GameBoardView(this, this.enemyBoard, '#EnemyBoard');
+    const enemyView = new GameBoardView(this, this.enemyBoard, '#EnemyBoard');
     this.enemyBoard.placeAllShips();
     this.view = new GameLogicView('#header');
   }
 
   setTurn(same = false) {
-    if (!same && !this.gameOver){
+    if (!same && !this.gameOver) {
       this.whosTurn = (this.whosTurn === 'Player' ? 'Enemy' : 'Player');
     }
     console.log(this.whosTurn);
-    if(this.whosTurn === 'Enemy'){this.enemyFire()};
+    if (this.whosTurn === 'Enemy') { this.enemyFire(); }
   }
 
   isGameOver() {
-    if (this.playerBoard.allShipsSunk() || this.enemyBoard.allShipsSunk()){
+    if (this.playerBoard.allShipsSunk() || this.enemyBoard.allShipsSunk()) {
       this.gameOver = true;
-      this.view.gameOver(this.whosTurn + ' Won!');
+      this.view.gameOver(`${this.whosTurn} Won!`);
     }
   }
 

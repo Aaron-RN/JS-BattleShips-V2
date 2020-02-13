@@ -1,5 +1,5 @@
 import Ship from './ship';
-//import GameBoardView from '../views/gameboard';
+// import GameBoardView from '../views/gameboard';
 
 class GameBoard {
   constructor(size, isPlayer = false) {
@@ -87,14 +87,11 @@ class GameBoard {
     const cell = this.board[coords.y][coords.x];
     if (cell.hit) { return null; }
 
-
     cell.hit = true;
     if (cell.shipId) {
       this.getShip(cell.shipId).hit();
-        return 'hit';
-
-    }
-    else{
+      return 'hit';
+    }else{
       return 'missed';
     }
   }
@@ -103,4 +100,3 @@ class GameBoard {
 }
 
 export default GameBoard;
-
