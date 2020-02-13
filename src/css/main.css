@@ -10,6 +10,42 @@ html { box-sizing: border-box; }
   transition-duration: 0.25s;
 }
 
+body {
+  font-family: Helvetica, Arial, san-serif;
+}
+
+#header {
+  text-align: center;
+}
+
+#header p {
+  font-size: 24px;
+}
+
+#header button {
+  font-size: 20px;
+  background: dodgerblue;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+#Game {
+  display: flex;
+  justify-content: space-between;
+  width: 1024px;
+  margin: 0 auto;
+}
+
+.board-container {
+  text-align: center;
+}
+
 #PlayerBoard, #EnemyBoard {
   display: flex;
   flex-wrap: wrap;

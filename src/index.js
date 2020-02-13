@@ -1,3 +1,4 @@
+import './css/main.css';
 import GameBoard from './models/gameboard';
 import GameBoardView from './views/gameboard';
 import GameLogic from './models/gamelogic';
