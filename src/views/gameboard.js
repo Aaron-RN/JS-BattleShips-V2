@@ -2,6 +2,8 @@ class GameBoardView {
   constructor(model, selector) {
     this.model = model;
     this.boardNode = document.querySelector(selector);
+    this.cells = Array(this.model.size).fill(Array(this.model.size).fill())
+      .map((row, i) => row.map((cell, j) => (this.newCell(j, i))));
   }
 
   newCell(x, y) {
@@ -18,12 +20,14 @@ class GameBoardView {
     return cellNode;
   }
 
-  addEffects(cell, effect) {
-    cell.node.classList.add(effect);
+  addEffects({x, y}, effect) {
+    const cell = cells[x][y];
+    cell.classList.add(effect);
   }
 
-  placeShip(ship) {
-    ship.node.classList.add('ship');
+  placeShip({x, y}) {
+    const cell = cells[x][y];
+    cell.classList.add('ship');
   }
 }
 

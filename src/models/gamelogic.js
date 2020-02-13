@@ -5,8 +5,10 @@ class GameLogic {
   constructor(size = 10) {
     this.size = size;
     this.gameOver = false;
-    this.playerBoard = new GameBoard(this, '#PlayerBoard', size, true);
-    this.enemyBoard = new GameBoard(this, '#EnemyBoard', size);
+    this.playerBoard = new GameBoard(this, size, true);
+    this.playerView = new GameBoardView(this.playerBoard, '#PlayerBoard');
+    this.enemyBoard = new GameBoard(this, size);
+    this.enemyView = new GameBoardView(this.enemyBoard, '#EnemyBoard');
     this.whosTurn = 'Player';
     this.view = new GameLogicView('#header');
     this.enemyMoves = [...Array(size ** 2).keys()];

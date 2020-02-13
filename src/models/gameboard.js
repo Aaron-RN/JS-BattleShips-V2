@@ -1,17 +1,16 @@
 import Ship from './ship';
-import GameBoardView from '../views/gameboard';
+//import GameBoardView from '../views/gameboard';
 
 class GameBoard {
-  constructor(gameLogic, boardNode, size, isPlayer = false) {
+  constructor(gameLogic, size, isPlayer = false) {
     this.isPlayer = isPlayer;
     this.size = size;
     this.gameLogic = gameLogic;
-    this.view = new GameBoardView(this, boardNode);
+//    this.view = new GameBoardView(this, boardNode);
     this.board = Array(size).fill(Array(size).fill())
       .map((row, i) => row.map((cell, j) => ({
         shipId: null,
         hit: false,
-        node: this.view.newCell(j, i),
       })));
     this.ships = [5, 4, 3, 3, 2].map(i => Ship(i));
     this.placeAllShips();
@@ -80,7 +79,7 @@ class GameBoard {
     for (let i = startX; i <= finishX; i += 1) {
       for (let j = startY; j <= finishY; j += 1) {
         this.board[j][i].shipId = ship.id;
-        if (this.isPlayer) {this.view.placeShip(this.board[j][i]);}
+//        if (this.isPlayer) {this.view.placeShip(this.board[j][i]);}
       }
     }
 
@@ -96,13 +95,13 @@ class GameBoard {
     cell.hit = true;
     if (cell.shipId) {
       this.getShip(cell.shipId).hit();
-      this.gameLogic.isGameOver();
-      this.view.addEffects(cell, 'hit');
-      this.gameLogic.setTurn(true);
+//      this.gameLogic.isGameOver();
+//      this.view.addEffects(cell, 'hit');
+//      this.gameLogic.setTurn(true);
     }
     else{
-      this.gameLogic.setTurn();
-      this.view.addEffects(cell, 'missed');
+//      this.gameLogic.setTurn();
+//      this.view.addEffects(cell, 'missed');
     }
   }
 
