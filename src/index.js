@@ -1,5 +1,5 @@
 import './css/main.css';
-import GameLogic from './models/gamelogic';
+import GameView from './views/game';
 
-const battleShips = new GameLogic();
-battleShips.run();
+const app = new GameView();
+app.run();

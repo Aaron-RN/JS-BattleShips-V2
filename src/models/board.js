@@ -1,22 +1,12 @@
 import Ship from './ship';
-import GameBoardView from '../views/gameboard';
 
-class GameBoard {
-  constructor(gameLogic, boardNode, size, isPlayer = false) {
-    this.isPlayer = isPlayer;
+class Board {
+  constructor(size) {
     this.size = size;
-    this.gameLogic = gameLogic;
-    this.view = new GameBoardView(this, boardNode);
     this.board = Array(size).fill(Array(size).fill())
-      .map((row, i) => row.map((cell, j) => ({
-        shipId: null,
-        hit: false,
-        node: this.view.newCell(j, i),
-      })));
+      .map(row => row.map(() => ({ shipId: null, hit: false })));
     this.ships = [5, 4, 3, 3, 2].map(i => Ship(i));
   }
-
-  getBoard() { return this.board; }
 
   getShip(shipId) {
     return this.ships.find(ship => ship.id === shipId);
@@ -69,7 +59,7 @@ class GameBoard {
 
     for (let i = startX; i <= finishX; i += 1) {
       for (let j = startY; j <= finishY; j += 1) {
-        if (this.board[j][i].shipId) {
+        if (this.board[i][j].shipId) {
           return false;
         }
       }
@@ -78,8 +68,7 @@ class GameBoard {
     // Place the ship in the board
     for (let i = startX; i <= finishX; i += 1) {
       for (let j = startY; j <= finishY; j += 1) {
-        this.board[j][i].shipId = ship.id;
-        if (this.isPlayer) { GameBoardView.placeShip(this.board[j][i]); }
+        this.board[i][j].shipId = ship.id;
       }
     }
 
@@ -87,23 +76,19 @@ class GameBoard {
   }
 
   receiveAttack(coords) {
-    if (this.gameLogic.gameOver) { return; }
-    const cell = this.board[coords.y][coords.x];
+    const cell = this.board[coords.x][coords.y];
     if (!cell.hit) {
       cell.hit = true;
       if (cell.shipId) {
         this.getShip(cell.shipId).hit();
-        this.gameLogic.isGameOver();
-        GameBoardView.addEffects(cell, 'hit');
-        this.gameLogic.setTurn(true);
-      } else {
-        this.gameLogic.setTurn();
-        GameBoardView.addEffects(cell, 'missed');
+        return 'hit';
       }
+      return 'missed';
     }
+    return null;
   }
 
   allShipsSunk() { return this.ships.every(ship => ship.isSunk()); }
 }
 
-export default GameBoard;
+export default Board;
