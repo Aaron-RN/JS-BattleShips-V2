@@ -1,6 +1,7 @@
 import GameBoard from './models/gameboard';
 import GameBoardView from './views/gameboard';
+import GameLogic from './models/gamelogic';
 
 const mainBoard = document.querySelector('#GameBoard');
 
-const boardOne = new GameBoard('#PlayerOneBoard', 10);
+const BattleShips = new GameLogic();

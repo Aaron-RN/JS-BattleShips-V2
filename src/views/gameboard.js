@@ -7,21 +7,28 @@ class GameBoardView {
     this.boardNode = document.querySelector(selector);
   }
 
-  newCell(y, x) {
+  newCell(x, y) {
     const cellNode = document.createElement('div');
     cellNode.classList.add('cell');
     cellNode.setAttribute('data-x', x);
     cellNode.setAttribute('data-y', y);
-    cellNode.addEventListener('click', () => {
-      const result = this.model.receiveAttack({ x, y });
-      if (result) { cellNode.classList.add(result); }
-    });
+    if (!this.model.isPlayer){
+      cellNode.addEventListener('click', () => {
+        console.log(x + " " + y);
+        this.model.receiveAttack({ x, y });
+  //      if (result) { cellNode.classList.add(result); }
+      });
+    }
     this.boardNode.appendChild(cellNode);
     return cellNode;
   }
 
+  addEffects(cell, effect) {
+    cell.node.classList.add(effect);
+  }
+  
   placeShip(ship) {
-    ship.node.textContent = ship.shipId;
+    ship.node.classList.add('ship');
   }
 }
 

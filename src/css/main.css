@@ -10,7 +10,7 @@ html { box-sizing: border-box; }
   transition-duration: 0.25s;
 }
 
-#PlayerOneBoard, #PlayerTwoBoard {
+#PlayerBoard, #EnemyBoard {
   display: flex;
   flex-wrap: wrap;
   max-width: 500px;
@@ -36,6 +36,10 @@ html { box-sizing: border-box; }
 .cell:hover{
   border-style: dotted;
   border-color: goldenrod;
+}
+.ship{
+  border: 1px solid green;
+  background-image: url(../images/ship.png);
 }
 
 .hit {

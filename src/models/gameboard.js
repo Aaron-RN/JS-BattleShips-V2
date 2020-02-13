@@ -2,8 +2,10 @@ import Ship from './ship';
 import GameBoardView from '../views/gameboard';
 
 class GameBoard {
-  constructor(boardNode, size) {
+  constructor(gameLogic, boardNode, size, isPlayer = false) {
+    this.isPlayer = isPlayer;
     this.size = size;
+    this.gameLogic = gameLogic;
     this.view = new GameBoardView(this, boardNode);
     this.board = Array(size).fill(Array(size).fill())
       .map((row, i) => row.map((cell, j) => ({
@@ -78,7 +80,7 @@ class GameBoard {
     for (let i = startX; i <= finishX; i += 1) {
       for (let j = startY; j <= finishY; j += 1) {
         this.board[j][i].shipId = ship.id;
-        // this.view.placeShip(this.board[j][i]);
+        if (this.isPlayer) {this.view.placeShip(this.board[j][i]);}
       }
     }
 
@@ -86,18 +88,26 @@ class GameBoard {
   }
 
   receiveAttack(coords) {
+    if (this.gameLogic.gameOver) {return;}
     const cell = this.board[coords.y][coords.x];
     if (cell.hit) { return null; }
+
 
     cell.hit = true;
     if (cell.shipId) {
       this.getShip(cell.shipId).hit();
-      return 'hit';
+      this.gameLogic.isGameOver();
+      this.view.addEffects(cell, 'hit');
+      this.gameLogic.setTurn(true);
     }
-    return 'missed';
+    else{
+      this.gameLogic.setTurn();
+      this.view.addEffects(cell, 'missed');
+    }
   }
 
   allShipsSunk() { return this.ships.every(ship => ship.isSunk()); }
 }
 
 export default GameBoard;
+
