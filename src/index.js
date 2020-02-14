@@ -1,9 +1,5 @@
 import './css/main.css';
-import GameBoard from './models/gameboard';
-import GameBoardView from './views/gameboard';
-import GameLogic from './models/gamelogic';
+import GameView from './views/game';
 
-const mainBoard = document.querySelector('#GameBoard');
-
-const BattleShips = new GameLogic();
-BattleShips.run();
+const app = new GameView();
+app.run();
