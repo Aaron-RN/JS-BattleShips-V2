@@ -28,7 +28,7 @@ class GameView {
           }
 
           if (this.game.over) {
-            if (this.game.currentPlayer.name === 'You') this.gameOver('Congratulations, you win!');
+            if (this.game.winner.name === 'You') this.gameOver('Congratulations, you win!');
             else {
               this.gameOver('Uh oh, the Enemy wins!');
             }
