@@ -1,0 +1,95 @@
+html { box-sizing: border-box; }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  transition-duration: 0.25s;
+}
+
+body {
+  font-family: Helvetica, Arial, san-serif;
+}
+
+#header {
+  text-align: center;
+}
+
+#header p {
+  font-size: 24px;
+}
+
+#header button {
+  font-size: 20px;
+  background: dodgerblue;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+#Game {
+  display: flex;
+  justify-content: space-between;
+  width: 1024px;
+  margin: 0 auto;
+}
+
+.board-container {
+  text-align: center;
+}
+
+#PlayerBoard, #EnemyBoard {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px;
+  outline: 1px solid black;
+  background-image: url(../images/water.png);
+  background-repeat: repeat;
+  background-color:rgb(50,90,180);
+  animation: backgroundScroll 80s linear infinite;
+}
+
+.cell {
+  flex: 1 0 9.5%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid royalblue;
+  cursor: pointer;
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  background-size: cover;
+}
+
+.cell:hover{
+  border-style: dotted;
+  border-color: goldenrod;
+}
+.ship{
+  border: 1px solid green;
+  background-image: url(../images/ship.png);
+}
+
+.hit {
+  background-color: rgba(255, 0, 0, 0.7);
+  background-image: url(../images/hit.gif), url(../images/ship.png);
+}
+
+.missed {
+  background-color: rgba(0, 110, 255, 0.7);
+  background-image: url(../images/missed.gif);
+}
+
+/*Animations*/
+@keyframes backgroundScroll {
+from {background-position: 0 0;}
+to {background-position: -1000px -1000px;}
+}
