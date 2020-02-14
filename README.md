@@ -3,8 +3,30 @@ Creating the classic game ‘Battleship’ within a Test Development Driven (TDD
 
 ![screenshot](./screenshot.png)
 
-## Live Link
-Live Githack Link: https://raw.githack.com/Aaron-RN/JS-BattleShips/development/dist/index.html
+## Setting up
+
+### Installing dependencies
+
+```
+npm install
+```
+
+### Starting the server
+
+```
+npm run start
+```
+
+If all goes well the game should be avalable at http://localhost:8080
+
+
+### Running the test suites
+```
+npm run test
+```
+
+## Live version
+A live version of the game can be found [here](https://raw.githack.com/Aaron-RN/JS-BattleShips/battleships/dist/index.html)
 
 ## Built With
 
