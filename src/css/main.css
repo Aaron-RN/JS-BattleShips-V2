@@ -17,6 +17,7 @@ body {
   background-image: url(../images/background_2.jpg);
   background-position: center;
   background-repeat: repeat;
+  background-attachment: fixed;
 }
 
 .authors {
@@ -74,30 +75,32 @@ body {
 #PlayerBoard, #EnemyBoard {
   display: flex;
   flex-wrap: wrap;
-  max-width: 600px;
+  max-width: 580px;
   outline: 1px solid black;
   background-image: url(../images/water.png);
   background-repeat: repeat;
   background-color:rgb(50,90,180);
+  background-attachment: fixed;
   border: 2px solid white;
   border-radius: 12px 12px;
   animation: backgroundScroll 80s linear infinite;
 }
 
 .cell {
+  position: relative;
   flex: 1 0 9.5%;
   width: 50px;
-  height: 60px;
-  line-height: 60px;
+  height: 54px;
+  line-height: 54px;
   outline: 1px solid rgba(0,0,0,0.2);
   cursor: pointer;
   text-align: center;
-  color: rgba(0,0,0,0.2);
+  color: rgba(0,0,0,0.25);
   font-weight: bold;
   background-size: cover;
 }
-
-.cell:hover{
+.cell:before{ position: absolute;left: 0; width: 100%; height: 100%; content: '';}
+.cell:hover:before{
   border-style: solid;
   border-color: rgba(255, 204, 0, 0.3);
   background-color: rgba(255,255,255,0.6)!important;

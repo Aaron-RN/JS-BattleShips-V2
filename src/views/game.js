@@ -1,4 +1,5 @@
 import Game from '../models/game';
+import playSound from '../audio/audio';
 
 class GameView {
   constructor(size = 10) {
@@ -40,7 +41,10 @@ class GameView {
 
   playerPlay(cell) {
     const result = this.game.play(cell.dataset);
-    if (result) { cell.classList.add(result); }
+    if (result) { 
+      playSound('fire');
+      cell.classList.add(result); 
+    }
 
     return result;
   }
@@ -74,8 +78,6 @@ class GameView {
 
   initHeader() {
     const headerNode = document.getElementById('header');
-    const h1 = document.createElement('h1');
-    h1.innerHTML = 'Battleships';
     this.messageContainer = document.createElement('div');
     this.messageContainer.classList.toggle('hidden');
     this.message = document.createElement('p');
@@ -85,7 +87,6 @@ class GameView {
     this.messageContainer.appendChild(this.message);
     this.messageContainer.appendChild(button);
 
-    headerNode.appendChild(h1);
     headerNode.appendChild(this.messageContainer);
   }
 
