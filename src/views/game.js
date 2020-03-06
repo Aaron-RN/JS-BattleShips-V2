@@ -63,6 +63,7 @@ class GameView {
         cellNode.classList.add('cell');
         cellNode.setAttribute('data-x', i);
         cellNode.setAttribute('data-y', j);
+        cellNode.textContent=i+j;
         if (!enemy && board[i][j].shipId) {
           cellNode.classList.add('ship');
         }

@@ -1,23 +1,58 @@
 <!doctype html>
 <html>
  <head>
-   <title>JS - Battleships</title>
+   <title>JS - Battleships V2</title>
     <script defer src="bundle.js"></script>
  </head>
  <body>
+<!--
+  <div id="MenuContainer">
+    <div style="width:55%;padding-top:3em;margin:0 auto;">
+      <div style="padding-top:2em;">
+          <h2 class="bottombar-2-black GameTitle glowText-black">BattleShips 
+          <br> <span class="authors">by Aaron R. Newbold and Eleazar Meza Rivas</span></h2>
+      </div>
+    </div>
+    <div class="Menu" style="padding-top:1em;width:35%;">
+      <h2 id="ShowAll" class="menuOption glowText-black" style="padding-top:0.5em;">Reveal Enemies (false)</h2>
+      <h2 id="Enemies" class="menuOption glowText-black">Number of Enemies (5)</h2>
+      <h2 id="StartGame" class="menuOption glowText-black bottombar-black">Start Game!</h2>
+      <h2 class="menuOption" style="padding-bottom:1em;"></h2>
+    </div>
+  </div>
+-->
+  <div id="WholeBoard">
     <div id="header">
     </div>
     <div id="Game">
-      <div class="board-container">
-        <h2>Your ships</h2>
-        <div id="PlayerBoard">
+      <div class="padtop-1">
+        <div class="text-center text-white">
+          <h1>Enemy's Board</h1>
+          <div id="ShipCounter">Ships Destroyed: 0/5</div>
         </div>
+        <div class="board-container">
+          <div id="EnemyBoard" class="center">
+          </div>
+        </div>        
       </div>
-      <div class="board-container">
-        <h2>Enemy ships</h2>
-        <div id="EnemyBoard">
+      <div class="divider"></div>
+      <div>
+        <div class="text-center text-white">
+          <h1>Your Board</h1>
+          <div id="ShipCounter">Ships Destroyed: 0/5</div>
         </div>
+        <div class="board-container">
+          <div id="PlayerBoard" class="center">
+          </div>
+        </div>        
       </div>
     </div>
- </body>
+  </div>
+  <div class="aa-modal fade">
+    <div class="aa-modal-content">
+      <img id="playerCannon" src="images/cannonUp.png">
+      <img id="enemyCannon" src="images/cannonDown.png">
+    </div>
+  </div>
+</body>
 </html>
