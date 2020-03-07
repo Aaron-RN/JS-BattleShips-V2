@@ -1,4 +1,6 @@
 import Game from '../models/game';
+import cannonUp from '../images/ship.png';
+import cannonDown from '../images/cannonDown.png';
 import playSound from '../audio/audio';
 
 class GameView {
@@ -9,6 +11,11 @@ class GameView {
     this.game.player2.targetBoard.placeAllShips();
     this.playerBoardNode = document.getElementById('PlayerBoard');
     this.enemyBoardNode = document.getElementById('EnemyBoard');
+    this.whosTurn = 'Player';
+    this.page = document.querySelector('body');
+    this.modal = document.querySelector('.aa-modal');
+    this.modalContent = document.querySelector(".aa-modal-content");
+    this.turnsTaken = 0;
     this.enemyMoves = [...Array(this.size ** 2).keys()];
     this.initHeader();
   }
@@ -38,12 +45,83 @@ class GameView {
       });
     });
   }
-
+  SwitchTurns(){
+    let {modal, modalContent, whosTurn, turnsTaken} = this;
+    if(whosTurn=="Enemy"){
+      turnsTaken++
+      //EnemyCannon.style.display="none";
+      whosTurn="Player";
+      //PlayerCannon.style.display="block";
+      modal.classList.remove("fade","fade-5");
+      modal.classList.add("fade");
+      modal.style.display="block";
+      modalContent.innerHTML="<p class='glowText'>Round:"+turnsTaken+"</p><p class='glowText'>Player's Turn<p>"
+      //snd_gui_open.play();
+      setTimeout(() => this.CloseModal(), 2000);
+    }else{
+      //PlayerCannon.style.display="none";
+      whosTurn="Enemy";
+      //EnemyCannon.style.display="block";
+      modal.classList.remove("fade","fade-5");
+      modal.classList.add("fade");
+      modal.style.display="block";
+      modalContent.innerHTML="<p class='glowText'>Round:"+turnsTaken+"</p><p class='glowText'>Enemy's Turn<p>"
+      //snd_gui_open.play();
+      setTimeout(() => this.CloseModal(), 2000);
+    }
+  }
+  
+  CloseModal(Switch){
+    if(!this.game.over){
+      let {modal, modalContent, whosTurn} = this;
+      modal.style.display="none";
+      modalContent.innerHTML=`<img id='playerCannon' src='${cannonUp}'><img id='enemyCannon' src='${cannonDown}'>`;
+//      window.PlayerCannon = document.getElementById("playerCannon");
+//      window.EnemyCannon = document.getElementById("enemyCannon");
+//      if(!Switch && whosTurn==="Enemy"){AI();}
+      if(Switch){this.SwitchTurns();}
+    }
+  }
+  
   playerPlay(cell) {
     const result = this.game.play(cell.dataset);
     if (result) { 
-      playSound('fire');
-      cell.classList.add(result); 
+      let {modal, page, modalContent, whosTurn} = this;
+      //playSound('fire');
+      modal.classList.remove("fade");
+      modal.classList.add("fade-5");
+      modal.style.display="block";
+      modalContent.innerHTML=`<img id='playerCannon' src='${cannonUp}'><img id='enemyCannon' src='${cannonDown}'><div class='cannonMissile missileFalling'></div>`;
+      var missile = document.querySelector(".cannonMissile");
+      if(whosTurn==="Player")
+      {
+          const PlayerCannon = document.getElementById("playerCannon");
+          PlayerCannon.style.display="block";
+          PlayerCannon.classList.add("cannon");
+      }
+      if(whosTurn==="Enemy")
+      {
+          const EnemyCannon = document.getElementById("enemyCannon");
+          EnemyCannon.style.display="block";
+          EnemyCannon.classList.add("cannon");
+      }
+      setTimeout(() => this.CloseModal(true), 5000);
+      //This occurs in line with the firing animation of the cannon
+      setTimeout(function(){
+//          if(rand==1){snd_fire.play();}
+//          if(rand==2){snd_fire2.play();}
+//          if(rand==3){snd_fire3.play();}
+          page.classList.add("shake");
+          modal.classList.add("flash");
+      },500);
+      //Displays the falling missile animation
+      setTimeout(function(){
+          missile.style.display="block";
+      },1500);
+      
+      setTimeout(function(){
+        cell.classList.add(result); 
+      },3000);
     }
 
     return result;
