@@ -44,7 +44,10 @@ class GameView {
     let {modal, modalContent, game} = this;
     let { turnsTaken } = game;
     const player = game.currentPlayer === game.player1? 'Player' : 'Enemy';
-    if (player==='Player'){ turnsTaken += 1; }
+    if (player==='Player'){ 
+      turnsTaken += 1; 
+      this.enemyBoardNode.scrollIntoView({behavior: "smooth", block: "center"});
+    }else{ this.playerBoardNode.scrollIntoView({behavior: "smooth", block: "center"});}
     modal.classList.remove("fade","fade-5");
     modal.classList.add("fade");
     modalContent.innerHTML=`<p class='glowText'>Round: ${turnsTaken} </p><p class='glowText'>${player}'s Turn<p>`
