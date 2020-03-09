@@ -113,6 +113,8 @@ body {
 
 .hit {
   background-color: rgba(0, 0, 0, 0.6);
+  background-image: url(../images/slowburn.gif);
+  background-position: center;
   border: 1px solid darkred;
 }
 
@@ -161,10 +163,14 @@ to {background-position: -1000px -1000px;}
 
 .splash
 {
-    display:block;
-    margin:auto;
-    height: 100%;
-    width: auto;
+  position: absolute;
+  display:block;
+  margin:auto;
+  left: 50%;
+  margin-left: -180px;
+  top: 0;
+  height: 360px;
+  width: 360px;
 }
 
 

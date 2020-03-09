@@ -2,6 +2,8 @@ import Game from '../models/game';
 import cannonUp from '../images/ship.png';
 import cannonDown from '../images/cannonDown.png';
 import missShot from '../images/missed.gif';
+import hitShot from '../images/kboom.gif';
+import fireBurn from '../images/slowburn.gif';
 import playSound from '../audio/audio';
 
 class GameView {
@@ -133,6 +135,8 @@ class GameView {
       cell.classList.add(result);
       if (result === 'missed'){
         modalContent.innerHTML=`<img class='splash' src='${missShot}'>`; }
+      if (result === 'hit'){
+        modalContent.innerHTML=`<img class='splash' src='${hitShot}'>`; }
       if(game.currentPlayer===game.player1){playerCannon.classList.remove("cannon", "show");}
       if(game.currentPlayer===game.player2){enemyCannon.classList.remove("cannon", "show");}
       page.classList.remove("shake");
