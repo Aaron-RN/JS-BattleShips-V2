@@ -4,7 +4,7 @@ import cannonDown from '../images/cannonDown.png';
 import missShot from '../images/missed.gif';
 import hitShot from '../images/kboom.gif';
 import fireBurn from '../images/slowburn.gif';
-import playSound from '../audio/audio';
+//import playSound from '../audio/audio';
 
 class GameView {
   constructor(size = 10) {
@@ -127,6 +127,7 @@ class GameView {
     this.timer = setTimeout(() => {
         page.classList.add("shake");
         modal.classList.add("flash");
+//        playSound('fire');
     },500);
     //Displays the falling missile animation
     this.timer = setTimeout(() => {
