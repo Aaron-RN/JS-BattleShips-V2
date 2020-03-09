@@ -4,7 +4,9 @@ class Game {
   constructor(player1Name, player2Name, size = 10) {
     this.player1 = { name: player1Name, targetBoard: new Board(size) };
     this.player2 = { name: player2Name, targetBoard: new Board(size) };
+    this.turnsTaken = 1;
     this.over = false;
+    this.cutscene = false;
     this.winner = null;
     this.currentPlayer = this.player1;
   }
@@ -17,7 +19,7 @@ class Game {
         this.over = true;
         this.winner = this.currentPlayer;
       } else if (attackResult === 'missed') {
-        this.switchTurns();
+        setTimeout(() => this.switchTurns(), 5000);
       }
 
       return attackResult;

@@ -172,10 +172,10 @@ to {background-position: -1000px -1000px;}
 {
     display: none;
     position: absolute;
-    margin: 0 auto;
     pointer-events: none;
-    left: 32.5%;
-    top: 200px;
+    left: 50%;
+    margin-left: -250px;
+    top: 0;
     width: 500px;
     height: 500px;
 }
@@ -184,30 +184,30 @@ to {background-position: -1000px -1000px;}
 {
     display: none;
     position: absolute;
-    margin: 0 auto;
     pointer-events: none;
-    left: 32.5%;
-    top: 200px;
+    left: 50%;
+    margin-left: -250px;
+    top: 0;
     width: 500px;
     height: 500px;
 }
 .cannonMissile
 {
-    display: none;
-    position: absolute;
-    margin: 0 auto;
-    pointer-events: none;
-    z-index: -1;
-    background-color: rgb(10,10,10);
-    left: 45%;
-    top: 300px;
-    width: 120px;
-    padding-bottom: 120px;
-    box-shadow: 0px 0px 15px black;
-    -webkit-box-shadow: 0px 0px 20px black;
-    border-radius: 125px;
-    border-radius: 50%;
-    transform-origin: center;
+  display: none;
+  position: absolute;
+  top: 500%;
+  left: 50%;
+  margin-left: -60px;
+  pointer-events: none;
+  background-color: #000;
+  width: 120px;
+  opacity: 0.7;
+  padding-bottom: 120px;
+  box-shadow: 0px 0px 15px #000;
+  -webkit-box-shadow: 0px 0px 20px #000;
+  border-radius: 125px;
+  border-radius: 50%;
+  transform-origin: center;
 }
 .missileFalling
 {
@@ -268,9 +268,9 @@ to {background-position: -1000px -1000px;}
 }
         
 @keyframes cannonFire {
-    15%   {height: 400px;top:380px;}
-    30%  {height: 600px;top:100px;}
-    45%  {height: 500px;top:200px;}
+    15%   {height: 400px;top:180px;}
+    30%  {height: 600px;top:-100px;}
+    45%  {height: 500px;top:0px;}
     100% {opacity: 0;}
 }
 
@@ -306,21 +306,6 @@ to {background-position: -1000px -1000px;}
     0%   {transform: scale(1);}
     50%   {transform: scale(5);}
     100%  {transform: scale(1);}
-}
-.grid
-{
-    margin: 0 auto;
-    padding: 8px;
-    border: 2px solid white;
-    border-radius: 12px 12px;
-    background-image: url(../images/water.png);
-    background-repeat: repeat;
-    background-color:rgb(50,90,180);
-    -webkit-animation: backgroundScroll 80s linear infinite;
-    animation: backgroundScroll 80s linear infinite;
-    width: 35%;
-    height: 35%;
-    box-shadow: 2px 4px 12px black;
 }
 
 
@@ -365,26 +350,6 @@ to {background-position: -1000px -1000px;}
   box-shadow: 0px 0px 12px aliceblue;
 }
 
-#Console
-{
-    background-color: aliceblue;
-    height:280px;
-    width: 60%;
-    border:2px solid white;
-    border-bottom-left-radius: 35px;
-    border-bottom-right-radius: 35px;
-    box-shadow: 4px 6px 12px black;
-    margin: 0 auto;
-}
-
-#ConsoleText
-{
-    height: 70%;
-    overflow-y: auto;
-    padding-left: 10px;
-    border-top: 1px solid black;
-}
-
 
 .bottombar
 {
@@ -412,13 +377,7 @@ to {background-position: -1000px -1000px;}
     margin-top:0.4em;
     border-radius: 15px 35px;
 }
-.consoleTitle
-{
-    font-family:fantasy;
-    text-align:center;
-    margin-top:0.4em;
-    border-radius: 15px 35px;
-}
+
 .menuOption
 {
     font-family:fantasy;

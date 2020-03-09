@@ -1,6 +1,7 @@
 import Game from '../models/game';
 import cannonUp from '../images/ship.png';
 import cannonDown from '../images/cannonDown.png';
+import missShot from '../images/missed.gif';
 import playSound from '../audio/audio';
 
 class GameView {
@@ -11,11 +12,9 @@ class GameView {
     this.game.player2.targetBoard.placeAllShips();
     this.playerBoardNode = document.getElementById('PlayerBoard');
     this.enemyBoardNode = document.getElementById('EnemyBoard');
-    this.whosTurn = 'Player';
     this.page = document.querySelector('body');
     this.modal = document.querySelector('.aa-modal');
     this.modalContent = document.querySelector(".aa-modal-content");
-    this.turnsTaken = 0;
     this.enemyMoves = [...Array(this.size ** 2).keys()];
     this.initHeader();
   }
@@ -26,14 +25,14 @@ class GameView {
 
     this.enemyBoardNode.childNodes.forEach(cell => {
       cell.addEventListener('click', () => {
-        if (!this.game.over) {
+        if (!this.game.over && !this.game.cutscene) {
           const playerResult = this.playerPlay(cell);
-          if (playerResult === 'missed') {
-            let enemyResult = null;
-            do {
-              enemyResult = this.enemyPlay();
-            } while (enemyResult === 'hit' && !this.game.over);
-          }
+//          if (playerResult === 'missed') {
+//            let enemyResult = null;
+//            do {
+//              setTimeout( () => enemyResult = this.enemyPlay(), 7100);
+//            } while (enemyResult === 'hit' && !this.game.over && !this.game.cutscene);
+//          }
 
           if (this.game.over) {
             if (this.game.winner.name === 'You') this.gameOver('Congratulations, you win!');
@@ -46,98 +45,101 @@ class GameView {
     });
   }
   SwitchTurns(){
-    let {modal, modalContent, whosTurn, turnsTaken} = this;
-    if(whosTurn=="Enemy"){
-      turnsTaken++
-      //EnemyCannon.style.display="none";
-      whosTurn="Player";
-      //PlayerCannon.style.display="block";
-      modal.classList.remove("fade","fade-5");
-      modal.classList.add("fade");
-      modal.style.display="block";
-      modalContent.innerHTML="<p class='glowText'>Round:"+turnsTaken+"</p><p class='glowText'>Player's Turn<p>"
-      //snd_gui_open.play();
-      setTimeout(() => this.CloseModal(), 2000);
-    }else{
-      //PlayerCannon.style.display="none";
-      whosTurn="Enemy";
-      //EnemyCannon.style.display="block";
-      modal.classList.remove("fade","fade-5");
-      modal.classList.add("fade");
-      modal.style.display="block";
-      modalContent.innerHTML="<p class='glowText'>Round:"+turnsTaken+"</p><p class='glowText'>Enemy's Turn<p>"
-      //snd_gui_open.play();
-      setTimeout(() => this.CloseModal(), 2000);
-    }
+    let {modal, modalContent, game} = this;
+    let { turnsTaken } = game;
+    const player = game.currentPlayer === game.player1? 'Player' : 'Enemy';
+    if (player==='Player'){ turnsTaken += 1; }
+    modal.classList.remove("fade","fade-5");
+    modal.classList.add("fade");
+    modalContent.innerHTML=`<p class='glowText'>Round: ${turnsTaken} </p><p class='glowText'>${player}'s Turn<p>`
+    //snd_gui_open.play();
+    setTimeout(() => this.CloseModal(true), 2000);
   }
   
-  CloseModal(Switch){
+  CloseModal(switched){
     if(!this.game.over){
       let {modal, modalContent, whosTurn} = this;
-      modal.style.display="none";
-      modalContent.innerHTML=`<img id='playerCannon' src='${cannonUp}'><img id='enemyCannon' src='${cannonDown}'>`;
-//      window.PlayerCannon = document.getElementById("playerCannon");
-//      window.EnemyCannon = document.getElementById("enemyCannon");
-//      if(!Switch && whosTurn==="Enemy"){AI();}
-      if(Switch){this.SwitchTurns();}
+      modal.classList.toggle("show");
+      modalContent.innerHTML='';
+
+      if(switched) { this.enemyPlay(); }
+      this.game.cutscene = false;
     }
   }
   
   playerPlay(cell) {
+    const { game } = this;
+
+    if(game.currentPlayer !== game.player1 ){ return; }
     const result = this.game.play(cell.dataset);
     if (result) { 
-      let {modal, page, modalContent, whosTurn} = this;
-      //playSound('fire');
-      modal.classList.remove("fade");
-      modal.classList.add("fade-5");
-      modal.style.display="block";
-      modalContent.innerHTML=`<img id='playerCannon' src='${cannonUp}'><img id='enemyCannon' src='${cannonDown}'><div class='cannonMissile missileFalling'></div>`;
-      var missile = document.querySelector(".cannonMissile");
-      if(whosTurn==="Player")
-      {
-          const PlayerCannon = document.getElementById("playerCannon");
-          PlayerCannon.style.display="block";
-          PlayerCannon.classList.add("cannon");
-      }
-      if(whosTurn==="Enemy")
-      {
-          const EnemyCannon = document.getElementById("enemyCannon");
-          EnemyCannon.style.display="block";
-          EnemyCannon.classList.add("cannon");
-      }
-      setTimeout(() => this.CloseModal(true), 5000);
-      //This occurs in line with the firing animation of the cannon
-      setTimeout(function(){
-//          if(rand==1){snd_fire.play();}
-//          if(rand==2){snd_fire2.play();}
-//          if(rand==3){snd_fire3.play();}
-          page.classList.add("shake");
-          modal.classList.add("flash");
-      },500);
-      //Displays the falling missile animation
-      setTimeout(function(){
-          missile.style.display="block";
-      },1500);
-      
-      setTimeout(function(){
-        cell.classList.add(result); 
-      },3000);
+      this.CannonFireTransitions(cell, result);
     }
 
     return result;
   }
 
   enemyPlay() {
+    const { game } = this;
+    console.log('EnemyPlay');
+    if (game.currentPlayer !== game.player2 ){ return; }
     const move = this.enemyMoves.splice(Math.floor(Math.random() * this.enemyMoves.length), 1)[0];
     const coords = { x: Math.floor(move / this.size), y: move % this.size };
     const result = this.game.play(coords);
     const cell = this.playerBoardNode
       .querySelector(`[data-x="${coords.x}"][data-y="${coords.y}"]`);
-    cell.classList.add(result);
+    this.CannonFireTransitions(cell, result);
 
     return result;
   }
 
+  CannonFireTransitions(cell, result){
+    let {modal, page, modalContent, game} = this;
+    clearInterval(this.timer);
+    
+    game.cutscene = true;
+    modal.classList.remove("fade");
+    modal.classList.add("fade-5");
+    modal.classList.toggle("show");
+    modalContent.innerHTML=`<img id='playerCannon' src='${cannonUp}'><img id='enemyCannon' src='${cannonDown}'><div class='cannonMissile missileFalling'></div>`;
+    const playerCannon = document.getElementById("playerCannon");
+    const enemyCannon = document.getElementById("enemyCannon");
+    const missile = document.querySelector(".cannonMissile");
+    if(game.currentPlayer===game.player1)
+    {
+        playerCannon.classList.toggle("show");
+        playerCannon.classList.add("cannon");
+    }
+    if(game.currentPlayer===game.player2)
+    {
+        enemyCannon.classList.toggle("show");
+        enemyCannon.classList.add("cannon");
+    }
+    this.timer = setTimeout(() => {
+      if(result==='missed'){this.SwitchTurns();}
+      if(result==='hit'){this.CloseModal();}
+    }, 5000);
+    //This occurs in line with the firing animation of the cannon
+    this.timer = setTimeout(() => {
+        page.classList.add("shake");
+        modal.classList.add("flash");
+    },500);
+    //Displays the falling missile animation
+    this.timer = setTimeout(() => {
+        missile.style.display="block";
+    },1500);
+
+    this.timer = setTimeout(() => {
+      cell.classList.add(result);
+      if (result === 'missed'){
+        modalContent.innerHTML=`<img class='splash' src='${missShot}'>`; }
+      if(game.currentPlayer===game.player1){playerCannon.classList.remove("cannon", "show");}
+      if(game.currentPlayer===game.player2){enemyCannon.classList.remove("cannon", "show");}
+      page.classList.remove("shake");
+      modal.classList.remove("flash");
+    },3000);  
+  }
+  
   static renderBoard(boardNode, board, enemy = false) {
     board.forEach((row, i) => {
       row.forEach((cell, j) => {
