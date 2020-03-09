@@ -115,7 +115,7 @@ body {
   background-color: rgba(0, 0, 0, 0.6);
   background-image: url(../images/slowburn.gif);
   background-position: center;
-  border: 1px solid darkred;
+  border: 1px solid rgba(255,0,0,0.3);
 }
 
 .missed {

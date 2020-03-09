@@ -98,6 +98,7 @@ class Board {
 
   static getDefaultShips() {
     return [5, 4, 3, 3, 2].map(size => Ship(size));
+//    return [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 3, 3, 3, 3, 3, 3, 3, 3, 2].map(size => Ship(size));
   }
 }
 

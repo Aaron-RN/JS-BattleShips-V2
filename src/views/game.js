@@ -65,6 +65,8 @@ class GameView {
       modalContent.innerHTML='';
 
       if(switched) { this.enemyPlay(); }
+      else if(this.game.currentPlayer === this.game.player2) {
+        setTimeout(() => {this.enemyPlay(); return;}, 100) }
       this.game.cutscene = false;
     }
   }
