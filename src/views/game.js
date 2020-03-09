@@ -28,13 +28,7 @@ class GameView {
     this.enemyBoardNode.childNodes.forEach(cell => {
       cell.addEventListener('click', () => {
         if (!this.game.over && !this.game.cutscene) {
-          const playerResult = this.playerPlay(cell);
-//          if (playerResult === 'missed') {
-//            let enemyResult = null;
-//            do {
-//              setTimeout( () => enemyResult = this.enemyPlay(), 7100);
-//            } while (enemyResult === 'hit' && !this.game.over && !this.game.cutscene);
-//          }
+          this.playerPlay(cell);
 
           if (this.game.over) {
             if (this.game.winner.name === 'You') this.gameOver('Congratulations, you win!');
@@ -85,7 +79,6 @@ class GameView {
 
   enemyPlay() {
     const { game } = this;
-    console.log('EnemyPlay');
     if (game.currentPlayer !== game.player2 ){ return; }
     const move = this.enemyMoves.splice(Math.floor(Math.random() * this.enemyMoves.length), 1)[0];
     const coords = { x: Math.floor(move / this.size), y: move % this.size };
