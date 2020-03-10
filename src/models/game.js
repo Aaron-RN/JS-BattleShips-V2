@@ -7,7 +7,7 @@ class Game {
     this.turnsTaken = 1;
     this.over = false;
     this.cutscene = false;
-    this.transitionsEnabled = false;
+    this.transitionsEnabled = true;
     this.winner = null;
     this.currentPlayer = this.player1;
   }
@@ -15,7 +15,6 @@ class Game {
   play(coords) {
     if (!this.over) {
       const attackResult = this.currentPlayer.targetBoard.receiveAttack(coords);
-      if (this.currentPlayer === this.player2){console.log(attackResult);}
       if (this.currentPlayer.targetBoard.allShipsSunk()) {
         this.over = true;
         this.winner = this.currentPlayer;

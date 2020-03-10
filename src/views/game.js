@@ -183,13 +183,14 @@ class GameView {
   }
   
   static renderBoard(boardNode, board, enemy = false) {
+    const boardLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
     board.forEach((row, i) => {
       row.forEach((cell, j) => {
         const cellNode = document.createElement('div');
         cellNode.classList.add('cell');
         cellNode.setAttribute('data-x', i);
         cellNode.setAttribute('data-y', j);
-        cellNode.textContent=`${i}${j}`;
+        cellNode.textContent=`${boardLetters[i]}${j+1}`;
         if (!enemy && board[i][j].shipId) {
           cellNode.classList.add('ship');
         }
