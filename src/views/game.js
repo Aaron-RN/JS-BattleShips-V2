@@ -21,9 +21,11 @@ class GameView {
     this.lastEnemyMove = null;
   }
 
-  run() {
+  run(showEnemies = false, enableTransitions = true) {
+    this.game.transitionsEnabled = enableTransitions;
+    
     GameView.renderBoard(this.playerBoardNode, this.game.player2.targetBoard.board);
-    GameView.renderBoard(this.enemyBoardNode, this.game.player1.targetBoard.board, true);
+    GameView.renderBoard(this.enemyBoardNode, this.game.player1.targetBoard.board, true, showEnemies);
 
     this.enemyBoardNode.childNodes.forEach(cell => {
       cell.addEventListener('click', () => {
@@ -114,17 +116,12 @@ class GameView {
       do {
         move = Math.floor(Math.random() * this.enemyMoves.length);
         validMove = this.enemyMoves.find(i => i === move);
-        console.log(move);
-        console.log(validMove);
         }
         while (!validMove);
       this.enemyMoves = this.enemyMoves.filter(i => i !== move);
-      console.log(this.enemyMoves);
     }
     const coords = { x: Math.floor(move / this.size), y: move % this.size };
-    console.log(coords);
     const result = this.game.play(coords);
-    console.log(result);
     const cell = this.playerBoardNode
       .querySelector(`[data-x="${coords.x}"][data-y="${coords.y}"]`);
     
@@ -189,7 +186,7 @@ class GameView {
     },3000);  
   }
   
-  static renderBoard(boardNode, board, enemy = false) {
+  static renderBoard(boardNode, board, enemy = false, showEnemies = false) {
     const boardLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
     board.forEach((row, i) => {
       row.forEach((cell, j) => {
@@ -198,7 +195,7 @@ class GameView {
         cellNode.setAttribute('data-x', i);
         cellNode.setAttribute('data-y', j);
         cellNode.textContent=`${boardLetters[i]}${j+1}`;
-        if (!enemy && board[i][j].shipId) {
+        if ((!enemy && board[i][j].shipId) || (showEnemies && board[i][j].shipId)) {
           cellNode.classList.add('ship');
         }
         boardNode.appendChild(cellNode);

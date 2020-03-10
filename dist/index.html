@@ -5,30 +5,26 @@
     <script defer src="bundle.js"></script>
  </head>
  <body>
-<!--
   <div id="MenuContainer">
-    <div style="width:55%;padding-top:3em;margin:0 auto;">
-      <div style="padding-top:2em;">
-          <h2 class="bottombar-2-black GameTitle glowText-black">BattleShips 
-          <br> <span class="authors">by Aaron R. Newbold and Eleazar Meza Rivas</span></h2>
+    <div class="menuHeader">
+      <div class="pad-12 padt-2 bottombar-2-black text-center mb-2">
+          <h2 class="GameTitle glowText-black">BattleShips</h2>
+          <div class="authors">by Aaron R. Newbold and Eleazar Meza Rivas</div>
       </div>
     </div>
-    <div class="Menu" style="padding-top:1em;width:35%;">
-      <h2 id="ShowAll" class="menuOption glowText-black" style="padding-top:0.5em;">Reveal Enemies (false)</h2>
-      <h2 id="Enemies" class="menuOption glowText-black">Number of Enemies (5)</h2>
+    <div class="Menu">
+      <h2 id="ShowAll" class="menuOption glowText-black">Reveal Enemies <span class="text-grey">(false)</span></h2>
+      <h2 id="Transitions" class="menuOption glowText-black">Enable Transitions <span class="text-grey">(true)</span></h2>
+      <br>
       <h2 id="StartGame" class="menuOption glowText-black bottombar-black">Start Game!</h2>
-      <h2 class="menuOption" style="padding-bottom:1em;"></h2>
     </div>
   </div>
--->
-  <div id="WholeBoard">
-    <div id="header">
-    </div>
+  <div id="WholeBoard" class="hide">
     <div id="Game">
-      <div class="padtop-1">
+      <div id="EnemySection">
         <div class="text-center text-white">
           <h1>Enemy's Board</h1>
-<!--          <div id="ShipCounter">Ships Destroyed: 0/5</div>-->
+<!--          <div id="EnemyShipCounter" class="ShipCounter">Ships Destroyed: 0/5</div>-->
         </div>
         <div class="board-container">
           <div id="EnemyBoard" class="center">
@@ -36,10 +32,10 @@
         </div>        
       </div>
       <div class="divider"></div>
-      <div>
+      <div id="PlayerSection">
         <div class="text-center text-white">
-          <h1>Your Board</h1>
-<!--          <div id="ShipCounter">Ships Destroyed: 0/5</div>-->
+          <h1>Player Board</h1>
+<!--          <div id="PlayerShipCounter" class="ShipCounter">Ships Destroyed: 0/5</div>-->
         </div>
         <div class="board-container">
           <div id="PlayerBoard" class="center">
