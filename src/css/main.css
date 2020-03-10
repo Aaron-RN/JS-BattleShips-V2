@@ -149,7 +149,7 @@ body {
 #PlayerBoard, #EnemyBoard {
   display: flex;
   flex-wrap: wrap;
-  max-width: 580px;
+  max-width: 640px;
   outline: 1px solid black;
   background-image: url(../images/water.png);
   background-repeat: repeat;
@@ -164,7 +164,7 @@ body {
   position: relative;
   flex: 1 0 9.5%;
   width: 50px;
-  height: 54px;
+  height: 62px;
   line-height: 54px;
   outline: 1px solid rgba(0,0,0,0.2);
   cursor: pointer;

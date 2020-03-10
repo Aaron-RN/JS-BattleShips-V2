@@ -18,6 +18,7 @@ class GameView {
     this.modal = document.querySelector('.aa-modal');
     this.modalContent = document.querySelector(".aa-modal-content");
     this.enemyMoves = [...Array(this.size ** 2).keys()];
+    this.lastEnemyMove = null;
     this.initHeader();
   }
 
@@ -28,7 +29,14 @@ class GameView {
     this.enemyBoardNode.childNodes.forEach(cell => {
       cell.addEventListener('click', () => {
         if (!this.game.over && !this.game.cutscene) {
-          this.playerPlay(cell);
+          const result = this.playerPlay(cell);
+          if (!this.game.transitionsEnabled){
+            if (result === 'missed'){
+              let enemyResult = null;
+              do { enemyResult = this.enemyPlay(); }
+              while (enemyResult === 'hit')
+            }
+          }
 
           if (this.game.over) {
             if (this.game.winner.name === 'You') this.gameOver('Congratulations, you win!');
@@ -61,7 +69,7 @@ class GameView {
       modal.classList.toggle("show");
       modalContent.innerHTML='';
 
-      if(switched) { this.enemyPlay(); }
+    if(switched) { this.enemyPlay(); }
       else if(this.game.currentPlayer === this.game.player2) {
         setTimeout(() => {this.enemyPlay(); return;}, 100) }
       this.game.cutscene = false;
@@ -74,7 +82,9 @@ class GameView {
     if(game.currentPlayer !== game.player1 ){ return; }
     const result = this.game.play(cell.dataset);
     if (result) { 
-      this.CannonFireTransitions(cell, result);
+      if (game.transitionsEnabled) {
+        this.CannonFireTransitions(cell, result);
+      } else { cell.classList.add(result);}
     }
 
     return result;
@@ -82,13 +92,40 @@ class GameView {
 
   enemyPlay() {
     const { game } = this;
+    let { lastEnemyMove } = this;
     if (game.currentPlayer !== game.player2 ){ return; }
-    const move = this.enemyMoves.splice(Math.floor(Math.random() * this.enemyMoves.length), 1)[0];
+    let move;
+    if (lastEnemyMove) {
+      console.log('LastEnemyMove Start');
+      console.log(this.enemyMoves);
+      move = this.enemyMoves.find( i => i === lastEnemyMove+10||
+                                       i === lastEnemyMove-10||
+                                       i === lastEnemyMove-1||
+                                       i === lastEnemyMove+1 );
+      console.log(move);
+      if (move){console.log(move, this.enemyMoves[move]);
+                       this.enemyMoves = this.enemyMoves.filter(i => i !== move);
+                       console.log(this.enemyMoves);}
+      else {lastEnemyMove = null; console.log('didnt find nearby move')}
+      console.log('LastEnemyMove End');
+    } else {
+      console.log('Null LastEnemy Move Start');
+      console.log(lastEnemyMove);
+      move = Math.floor(Math.random() * this.enemyMoves.length);
+      console.log(move);
+      this.enemyMoves = this.enemyMoves.filter(i => i !== move);
+      console.log(this.enemyMoves);
+      console.log('Null Last Enemy Move End');
+    }
     const coords = { x: Math.floor(move / this.size), y: move % this.size };
     const result = this.game.play(coords);
     const cell = this.playerBoardNode
       .querySelector(`[data-x="${coords.x}"][data-y="${coords.y}"]`);
-    this.CannonFireTransitions(cell, result);
+    
+    if (result === 'hit') { this.lastEnemyMove = move; }
+    if (game.transitionsEnabled) {
+      this.CannonFireTransitions(cell, result);
+    } else { cell.classList.add(result);}
 
     return result;
   }
@@ -150,7 +187,7 @@ class GameView {
         cellNode.classList.add('cell');
         cellNode.setAttribute('data-x', i);
         cellNode.setAttribute('data-y', j);
-        cellNode.textContent=i+j;
+        cellNode.textContent=`${i}${j}`;
         if (!enemy && board[i][j].shipId) {
           cellNode.classList.add('ship');
         }

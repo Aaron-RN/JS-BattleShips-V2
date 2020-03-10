@@ -7,6 +7,7 @@ class Game {
     this.turnsTaken = 1;
     this.over = false;
     this.cutscene = false;
+    this.transitionsEnabled = false;
     this.winner = null;
     this.currentPlayer = this.player1;
   }
@@ -19,7 +20,8 @@ class Game {
         this.over = true;
         this.winner = this.currentPlayer;
       } else if (attackResult === 'missed') {
-        setTimeout(() => this.switchTurns(), 5000);
+        if (this.transitionsEnabled){setTimeout(() => this.switchTurns(), 5000);}
+        else {this.switchTurns();}
       }
 
       return attackResult;
