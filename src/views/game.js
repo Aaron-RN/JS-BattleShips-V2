@@ -19,7 +19,6 @@ class GameView {
     this.modalContent = document.querySelector(".aa-modal-content");
     this.enemyMoves = [...Array(this.size ** 2).keys()];
     this.lastEnemyMove = null;
-    this.initHeader();
   }
 
   run() {
@@ -37,9 +36,9 @@ class GameView {
           }
 
           if (this.game.over) {
-            if (this.game.winner.name === 'You') this.gameOver('Congratulations, you win!');
+            if (this.game.winner.name === 'You') this.gameOver('Congratulations, You Won!');
             else {
-              this.gameOver('Uh oh, the Enemy wins!');
+              this.gameOver('You Lost all your Ships!');
             }
           }
         }
@@ -115,12 +114,17 @@ class GameView {
       do {
         move = Math.floor(Math.random() * this.enemyMoves.length);
         validMove = this.enemyMoves.find(i => i === move);
+        console.log(move);
+        console.log(validMove);
         }
         while (!validMove);
-        this.enemyMoves = this.enemyMoves.filter(i => i !== move);
+      this.enemyMoves = this.enemyMoves.filter(i => i !== move);
+      console.log(this.enemyMoves);
     }
     const coords = { x: Math.floor(move / this.size), y: move % this.size };
+    console.log(coords);
     const result = this.game.play(coords);
+    console.log(result);
     const cell = this.playerBoardNode
       .querySelector(`[data-x="${coords.x}"][data-y="${coords.y}"]`);
     
@@ -128,7 +132,10 @@ class GameView {
       this.CannonFireTransitions(cell, result);
     } else { cell.classList.add(result);}
 
-    if (result === 'hit') { this.lastEnemyMove = move; this.enemyPlay();}
+    if (result === 'hit') { 
+      this.lastEnemyMove = move;
+      if (!this.game.transitionsEnabled) {this.enemyPlay();}
+    }
     return result;
   }
 
@@ -199,23 +206,14 @@ class GameView {
     });
   }
 
-  initHeader() {
-    const headerNode = document.getElementById('header');
-    this.messageContainer = document.createElement('div');
-    this.messageContainer.classList.toggle('hidden');
-    this.message = document.createElement('p');
-    const button = document.createElement('button');
-    button.innerHTML = 'Play again?';
-    button.addEventListener('click', () => { window.location.reload(); });
-    this.messageContainer.appendChild(this.message);
-    this.messageContainer.appendChild(button);
-
-    headerNode.appendChild(this.messageContainer);
-  }
 
   gameOver(message) {
-    this.message.innerHTML = message;
-    this.messageContainer.classList.toggle('hidden');
+    const { modal, modalContent } = this;
+    modal.classList.remove("fade");
+    modal.classList.add("fadein");
+    modal.style.display="block";
+    modalContent.innerHTML =`<p class='glowText'>${message}</p><br>
+                            <button id='playAgainBtn' type='button' onclick='window.location.reload()' >Play Again?</button>`;
   }
 }
 

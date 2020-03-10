@@ -51,6 +51,16 @@ body {
   color: white;
 }
 
+#playAgainBtn{ 
+  pointer-events: all;
+  cursor: pointer;
+  font-size: 5vw;
+  color: aliceblue;
+  border: 8px solid #FFF;
+  border-radius: 8px;
+  background: #b8e675;
+}
+
 .hidden {
   display: none;
 }
