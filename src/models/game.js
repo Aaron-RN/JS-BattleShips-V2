@@ -19,8 +19,9 @@ class Game {
         this.over = true;
         this.winner = this.currentPlayer;
       } else if (attackResult === 'missed') {
-        if (this.transitionsEnabled){setTimeout(() => this.switchTurns(), 5000);}
-        else {this.switchTurns();}
+        if (this.transitionsEnabled) {
+          setTimeout(() => this.switchTurns(), 5000);
+        } else { this.switchTurns(); }
       }
 
       return attackResult;
