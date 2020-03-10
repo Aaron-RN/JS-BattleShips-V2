@@ -15,7 +15,7 @@ class Game {
   play(coords) {
     if (!this.over) {
       const attackResult = this.currentPlayer.targetBoard.receiveAttack(coords);
-
+      if (this.currentPlayer === this.player2){console.log(attackResult);}
       if (this.currentPlayer.targetBoard.allShipsSunk()) {
         this.over = true;
         this.winner = this.currentPlayer;
