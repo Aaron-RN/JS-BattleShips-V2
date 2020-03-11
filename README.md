@@ -28,7 +28,7 @@ npm run test
 ```
 
 ## Live version
-A live version of the game can be found [here](https://raw.githack.com/Aaron-RN/JS-BattleShips/battleships/dist/index.html)
+A live version of the game can be found [here](https://raw.githack.com/Aaron-RN/JS-BattleShips-V2/development/dist/index.html)
 
 ## Built With
 
