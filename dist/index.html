@@ -1,23 +1,52 @@
 <!doctype html>
 <html>
  <head>
-   <title>JS - Battleships</title>
+   <title>JS - Battleships V2</title>
     <script defer src="bundle.js"></script>
  </head>
  <body>
-    <div id="header">
+  <div id="MenuContainer">
+    <div class="menuHeader">
+      <div class="pad-12 padt-2 bottombar-2-black text-center mb-2">
+          <h2 class="GameTitle glowText-black">BattleShips</h2>
+          <div class="authors">by Aaron R. Newbold and Eleazar Meza Rivas</div>
+      </div>
     </div>
+    <div class="Menu">
+      <h2 id="ShowAll" class="menuOption glowText-black">Reveal Enemies <span class="text-grey">(false)</span></h2>
+      <h2 id="Transitions" class="menuOption glowText-black">Enable Transitions <span class="text-grey">(true)</span></h2>
+      <br>
+      <h2 id="StartGame" class="menuOption glowText-black bottombar-black">Start Game!</h2>
+    </div>
+  </div>
+  <div id="WholeBoard" class="hide">
     <div id="Game">
-      <div class="board-container">
-        <h2>Your ships</h2>
-        <div id="PlayerBoard">
+      <div id="EnemySection">
+        <div class="text-center text-white">
+          <h1>Enemy's Board</h1>
+<!--          <div id="EnemyShipCounter" class="ShipCounter">Ships Destroyed: 0/5</div>-->
         </div>
+        <div class="board-container">
+          <div id="EnemyBoard" class="center">
+          </div>
+        </div>        
       </div>
-      <div class="board-container">
-        <h2>Enemy ships</h2>
-        <div id="EnemyBoard">
+      <div class="divider"></div>
+      <div id="PlayerSection">
+        <div class="text-center text-white">
+          <h1>Player Board</h1>
+<!--          <div id="PlayerShipCounter" class="ShipCounter">Ships Destroyed: 0/5</div>-->
         </div>
+        <div class="board-container">
+          <div id="PlayerBoard" class="center">
+          </div>
+        </div>        
       </div>
     </div>
- </body>
+  </div>
+  <div class="aa-modal fade">
+    <div class="aa-modal-content">
+    </div>
+  </div>
+</body>
 </html>
