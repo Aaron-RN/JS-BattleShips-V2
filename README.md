@@ -2,6 +2,8 @@
 Creating the classic game ‘Battleship’ within a Test Development Driven (TDD) environment. If you’ve never played it, or need a refresher you can read about it [here](https://en.wikipedia.org/wiki/Battleship_(game)) and you can play an online version [here](http://en.battleship-game.org/).
 
 ![screenshot](./screenshot.png)
+![screenshot](./screenshot2.png)
+![screenshot](./screenshot3.png)
 
 ## Setting up
 
