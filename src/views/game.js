@@ -87,15 +87,9 @@ class GameView {
   }
 
   randomizeMove() {
-    const move = { position: 0 };
-    let validMove = false;
-
-    while (!validMove) {
-      move.position = Math.floor(Math.random() * this.enemyMoves.length);
-      validMove = this.enemyMoves.find(i => i === move.position);
-    }
-
-    return move.position;
+    const randIndex = Math.floor(Math.random() * this.enemyMoves.length);
+    const move = this.enemyMoves[randIndex];
+    return move;
   }
 
   enemyPlay() {
