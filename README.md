@@ -27,8 +27,7 @@ If all goes well the game should be avalable at http://localhost:8080
 npm run test
 ```
 
-## Live version
-A live version of the game can be found [here](https://raw.githack.com/Aaron-RN/JS-BattleShips-V2/development/dist/index.html)
+## [Live DEMO](https://raw.githack.com/Aaron-RN/JS-BattleShips-V2/development/dist/index.html)
 
 ## Built With
 
