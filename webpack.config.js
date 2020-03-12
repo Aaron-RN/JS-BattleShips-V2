@@ -21,6 +21,12 @@ module.exports = {
           'file-loader',
         ],
       },
+      {
+        test: /\.(ogg|wav)$/i,
+        use: [
+          'file-loader',
+        ],
+      },
     ],
   },
 };
