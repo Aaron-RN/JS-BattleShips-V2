@@ -3,7 +3,7 @@ import cannonUp from '../images/ship.png';
 import cannonDown from '../images/cannonDown.png';
 import missShot from '../images/missed.gif';
 import hitShot from '../images/kboom.gif';
-// import playSound from '../audio/audio';
+import playSound from '../audio/audio';
 
 class GameView {
   constructor(size = 10) {
@@ -36,8 +36,8 @@ class GameView {
 
 
           if (this.game.over) {
-            if (this.game.winner.name === 'You') this.gameOver('Congratulations, You Won!');
-            else { this.gameOver('You Lost all your Ships!'); }
+            if (this.game.winner.name === 'You') { this.gameOver('Congratulations, You Won!'); playSound('won');}
+            else { this.gameOver('You Lost all your Ships!'); playSound('lost'); }
           }
         }
       });
@@ -156,7 +156,7 @@ class GameView {
     this.timer = setTimeout(() => {
       page.classList.add('shake');
       modal.classList.add('flash');
-      //        playSound('fire');
+      playSound('fire');
     }, 500);
     // Displays the falling missile animation
     this.timer = setTimeout(() => {
@@ -167,9 +167,11 @@ class GameView {
       cell.classList.add(result);
       if (result === 'missed') {
         modalContent.innerHTML = `<img class='splash' src='${missShot}'>`;
+        playSound('miss');
       }
       if (result === 'hit') {
         modalContent.innerHTML = `<img class='splash' src='${hitShot}'>`;
+        playSound('hit');
       }
       if (game.currentPlayer === game.player1) { playerCannon.classList.remove('cannon', 'show'); }
       if (game.currentPlayer === game.player2) { enemyCannon.classList.remove('cannon', 'show'); }
