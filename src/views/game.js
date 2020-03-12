@@ -36,8 +36,7 @@ class GameView {
 
 
           if (this.game.over) {
-            if (this.game.winner.name === 'You') { this.gameOver('Congratulations, You Won!'); playSound('won');}
-            else { this.gameOver('You Lost all your Ships!'); playSound('lost'); }
+            if (this.game.winner.name === 'You') { this.gameOver('Congratulations, You Won!'); playSound('won'); } else { this.gameOver('You Lost all your Ships!'); playSound('lost'); }
           }
         }
       });
