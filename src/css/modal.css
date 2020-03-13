@@ -89,3 +89,7 @@
   width: auto;
 }
 
+@media only screen and (max-width:620px) {
+  /* For mobile phones: */
+  .aa-modal-content{ font-size: 3em; }
+}
