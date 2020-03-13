@@ -1,4 +1,5 @@
 import './css/main.css';
+import './css/efx.css';
 import './css/modal.css';
 import GameView from './views/game';
 import playSound from './audio/audio';
