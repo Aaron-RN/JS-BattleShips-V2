@@ -156,6 +156,7 @@ class GameView {
       page.classList.add('shake');
       modal.classList.add('flash');
       playSound('fire');
+      if (game.over && result === 'hit') { cell.classList.add(result); }
     }, 500);
     // Displays the falling missile animation
     this.timer = setTimeout(() => {
@@ -198,6 +199,7 @@ class GameView {
 
 
   gameOver(message) {
+    clearTimeout(this.timer);
     const { modal, modalContent } = this;
     modal.classList.remove('fade');
     modal.classList.add('fadein');
