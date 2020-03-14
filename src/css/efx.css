@@ -1,0 +1,116 @@
+.splash
+{
+  position: absolute;
+  display:block;
+  margin:auto;
+  left: 50%;
+  margin-left: -180px;
+  top: 0;
+  height: 360px;
+  width: 360px;
+}
+
+
+#enemyCannon
+{
+  display: none;
+  position: absolute;
+  pointer-events: none;
+  left: 50%;
+  margin-left: -250px;
+  top: 0;
+  width: 500px;
+  height: 500px;
+}
+
+#playerCannon
+{
+  display: none;
+  position: absolute;
+  pointer-events: none;
+  left: 50%;
+  margin-left: -250px;
+  top: 0;
+  width: 500px;
+  height: 500px;
+}
+.cannonMissile
+{
+  display: none;
+  position: absolute;
+  top: 500%;
+  left: 50%;
+  margin-left: -60px;
+  pointer-events: none;
+  background-color: #000;
+  width: 120px;
+  opacity: 0.7;
+  padding-bottom: 120px;
+  box-shadow: 0px 0px 15px #000;
+  border-radius: 125px;
+  border-radius: 50%;
+  transform-origin: center;
+}
+.missileFalling
+{
+  animation-name: missile;
+  animation-duration: 1.4s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+.cannon
+{
+  animation-name: cannonFire;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+.shake
+{
+  position: relative;
+  overflow-x: hidden;
+  animation-name: screenShake;
+  animation-duration: 0.75s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+.flash
+{
+  animation-name: screenFlash;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+/*Animations*/
+
+@keyframes backgroundScroll {
+from {background-position: 0 0;}
+to {background-position: -1000px -1000px;}
+}
+       
+@keyframes cannonFire {
+  15%   {height: 400px;top:180px;}
+  30%  {height: 600px;top:-100px;}
+  45%  {height: 500px;top:0px;}
+  100% {opacity: 0;}
+}
+       
+@keyframes screenShake {
+  15%   {left: 0px;top:50px;}
+  30%  {left: 30px;top:0px;}
+  45%  {left: 0px;bottom:35px;}
+  60%  {left: 0px;bottom:0px;}
+}
+      
+@keyframes screenFlash {
+  50%   {background-color: rgba(255,180,25,1)!important;}
+  100%   {background-color: rgba(0,0,0,0.8);}
+}
+       
+@keyframes missile {
+  0%   {transform: scale(1);}
+  50%   {transform: scale(5);}
+  100%  {transform: scale(1);}
+}
