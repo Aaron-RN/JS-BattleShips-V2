@@ -9,7 +9,7 @@ html { box-sizing: border-box; }
 
 body {
   font-size:100%;
-  font-family:"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+  font-family:"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Tahoma", sans-serif;
   background-color: rgb(25,25,25);
   background-image: url(../images/background_2.jpg);
   background-position: center;
@@ -46,7 +46,7 @@ h2 { margin: 6px 0; }
 /*Console Related CSS*/
 .GameTitle
 {
-  font-family:fantasy;
+  font-family:fantasy, "Tahoma";
   text-align:center;
   font-size: 8vw;
   letter-spacing: 3px;
@@ -75,7 +75,7 @@ h2 { margin: 6px 0; }
 
 .menuOption
 {
-  font-family:fantasy;
+  font-family:fantasy, "Tahoma";
   font-size: 2em;
   font-weight: 100;
   color: cadetblue;
@@ -202,7 +202,8 @@ h2 { margin: 6px 0; }
 
 @media only screen and (max-width:620px) {
   /* For mobile phones: */
-  
+
+  p { font-size: 42px; }
   .GameTitle
   {
 
@@ -241,5 +242,15 @@ h2 { margin: 6px 0; }
     flex: 1 0 9.5%;
     width: auto;
     height: auto;
+  }
+  
+  #playAgainBtn{ 
+    pointer-events: all;
+    cursor: pointer;
+    font-size: 10vw;
+    color: aliceblue;
+    border: 8px solid #FFF;
+    border-radius: 8px;
+    background: #b8e675;
   }
 }
