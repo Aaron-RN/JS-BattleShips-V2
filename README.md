@@ -41,13 +41,13 @@ npm run test
 
 👤 **Aaron Rory**
 
-- Github: [@Aaron-RN](https://github.com/Aaron-RN)
+- GitHub: [@Aaron-RN](https://github.com/Aaron-RN)
 - Twitter: [@ARNewbold](https://twitter.com/ARNewbold)
 - Linkedin: [Aaron Newbold](https://www.linkedin.com/in/aaron-newbold-1b9233187/)
 
 👤 **Eleazar Meza Rivas**
 
-- Github: [@elshaka](https://github.com/elshaka)
+- GitHub: [@elshaka](https://github.com/elshaka)
 - Twitter: [@elshaka](https://twitter.com/elshaka)
 - Linkedin: [Eleazar Meza Rivas](https://www.linkedin.com/in/elshaka/)
 
