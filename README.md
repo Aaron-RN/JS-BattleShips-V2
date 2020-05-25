@@ -36,7 +36,7 @@ npm run test
 - [Node Package Manager(NPM)](https://www.npmjs.com/)
 - [Jest](https://github.com/facebook/jest)
 
-## Future Tasks
+### Future Tasks
 
 - Switch all setTimeout() related functions to async and await functions
 
