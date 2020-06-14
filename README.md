@@ -1,30 +1,29 @@
 # JS-BattleShips
-Creating the classic game ‘Battleship’ within a Test Development Driven (TDD) environment. If you’ve never played it, or need a refresher you can read about it [here](https://en.wikipedia.org/wiki/Battleship_(game)) and you can play an online version [here](http://en.battleship-game.org/).
+Creating the classic game ‘Battleship’ within a Test Development Driven (TDD) environment. If you’ve never played it, or if you need a refresher, you can read about it [here](https://en.wikipedia.org/wiki/Battleship_(game)) and you can play an online version [here](http://en.battleship-game.org/).
 
 ![screenshot](./screenshot.png)
 ![screenshot](./screenshot2.png)
 ![screenshot](./screenshot3.png)
 
-## Setup
+## Setup for Local use
 
-### Installing dependencies
-
-```
-npm install
-```
-
-### Starting the server
+### Install Dependencies
 
 ```
-npm run start
+$ npm install
 ```
 
-If all goes well the game should be avalable at http://localhost:8080
+### Run Application
 
-
-### Running the test suites
 ```
-npm run test
+$ npm run start
+```
+Now within your browser of choice, type http://localhost:8080 in the address bar to access the game.
+
+### Running Tests
+
+```
+$ npm run test
 ```
 
 ## [Live DEMO](https://raw.githack.com/Aaron-RN/JS-BattleShips-V2/development/dist/index.html)
