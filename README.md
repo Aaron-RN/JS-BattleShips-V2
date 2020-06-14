@@ -5,7 +5,7 @@ Creating the classic game ‘Battleship’ within a Test Development Driven (TDD
 ![screenshot](./screenshot2.png)
 ![screenshot](./screenshot3.png)
 
-## Setting up
+## Setup
 
 ### Installing dependencies
 
